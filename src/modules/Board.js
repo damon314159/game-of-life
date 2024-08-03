@@ -38,12 +38,12 @@ class Board {
     return this.cells[boxRow][boxCol].get(inBoxRow, inBoxCol)
   }
 
-  set(row, col, alive) {
+  set(row, col, state) {
     const { boxRow, boxCol, inBoxRow, inBoxCol } = Board.#getCellCoords(
       row,
       col
     )
-    this.cells[boxRow][boxCol].setBit(inBoxRow, inBoxCol, alive)
+    this.cells[boxRow][boxCol].setBit(inBoxRow, inBoxCol, state)
     return this
   }
 
@@ -62,9 +62,9 @@ class Board {
 export default Board
 
 const board = new Board(3, 3)
-board.set(1, 1, true)
-board.set(0, 3, true)
-board.set(0, 3, false)
-board.set(22, 11, true)
-board.set(0, 11, false)
+board.set(1, 1, 1)
+board.set(0, 3, 1)
+board.set(0, 3, 0)
+board.set(22, 11, 1)
+board.set(0, 11, 0)
 board.print()

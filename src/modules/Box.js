@@ -24,8 +24,8 @@ class Box extends Uint8Array {
   }
 
   // Set the state of the cell at (row, col) to be alive or dead
-  setBit(row, col, alive) {
-    this[row] = alive
+  setBit(row, col, state) {
+    this[row] = state
       ? // If it should be alive, OR with that bit
         this[row] | (Box.#MOST_SIG_BIT >> col)
       : // If it should be dead, AND with NOT that bit
