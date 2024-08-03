@@ -1,25 +1,41 @@
 import Box from './Box.js'
 
 class Board {
+  // No magic numbers, but this is always 8 due to bit packing
+  static #BOX_LEN = 8
+
+  // Specify the number of 8 x 8 boxes vertically and horizontally
   constructor(octetsWide, octetsHigh) {
+    // Ensure integer values
     this.octetsWide = Math.floor(octetsWide)
     this.octetsHigh = Math.floor(octetsHigh)
-    this.width = this.octetsWide * 8
-    this.height = this.octetsHigh * 8
+    // Calculate the resulting width and height
+    this.width = this.octetsWide * Board.#BOX_LEN
+    this.height = this.octetsHigh * Board.#BOX_LEN
 
+    // Populate cells with a matrix of boxes, which in turns represent 8 x 8 cells
     this.cells = Array.from({ length: this.octetsHigh }, () =>
       Array.from({ length: this.octetsWide }, () => new Box())
     )
   }
 
+  // Get the state of the cell at (row, col)
+  get(row, col) {
+    const [boxRow, boxCol] = [
+      Math.floor(row / Board.#BOX_LEN),
+      Math.floor(col / Board.#BOX_LEN),
+    ]
+    const [inBoxRow, inBoxCol] = [row % Board.#BOX_LEN, col % Board.#BOX_LEN]
+
+    return this.cells[boxRow][boxCol].get(inBoxRow, inBoxCol)
+  }
+
+  // Utility method to print to console the current state
   print() {
     const outputLines = Array.from({ length: this.height }, () => '')
     for (let row = 0; row < this.height; row += 1) {
       for (let col = 0; col < this.width; col += 1) {
-        const [boxRow, boxCol] = [Math.floor(row / 8), Math.floor(col / 8)]
-        const [inBoxRow, inBoxCol] = [row % 8, col % 8]
-        outputLines[row] +=
-          `${this.cells[boxRow][boxCol][inBoxRow] & (1 << (8 - inBoxCol))}  `
+        outputLines[row] += `${this.get(row, col)}  `
       }
     }
     console.log(outputLines.map((line) => line.trim()).join('\n'))

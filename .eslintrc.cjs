@@ -63,4 +63,7 @@ module.exports = {
     'no-bitwise':'off',
     'no-console':'off'
   },
+  parserOptions: {
+    ecmaVersion: 2022,
+  }
 }
