@@ -1,3 +1,5 @@
+import Box from './Box.js'
+
 class Board {
   constructor(octetsWide, octetsHigh) {
     this.octetsWide = Math.floor(octetsWide)
@@ -6,10 +8,7 @@ class Board {
     this.height = this.octetsHigh * 8
 
     this.cells = Array.from({ length: this.octetsHigh }, () =>
-      Array.from(
-        { length: this.octetsWide },
-        () => new Uint8Array(new ArrayBuffer(8), 0, 8)
-      )
+      Array.from({ length: this.octetsWide }, () => new Box())
     )
   }
 
