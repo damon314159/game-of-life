@@ -29,14 +29,14 @@ class Box extends Uint8Array {
       ? // If it should be alive, OR with that bit
         this[row] | (Box.#MOST_SIG_BIT >> col)
       : // If it should be dead, AND with NOT that bit
-        this[row] & !(Box.#MOST_SIG_BIT >> col)
+        this[row] & ~(Box.#MOST_SIG_BIT >> col)
 
     return this
   }
 
   // Check if any cells are alive by checking each byte. Any alive cell will make the byte non-zero
   get isEmpty() {
-    return this.some((byte) => byte > 0)
+    return !this.some((byte) => byte > 0)
   }
 }
 

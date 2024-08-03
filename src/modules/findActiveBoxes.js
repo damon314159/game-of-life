@@ -18,7 +18,7 @@ function checkBoxBorderEmpty(board, boxRow, boxCol) {
   for (let i = -1; i <= 1; i += 1) {
     for (let j = -1; j <= 1; j += 1) {
       if (isOnBoxBorder(boxRow, boxCol, i, j, boxesHigh, boxesWide)) {
-        const box = board[boxRow + i][boxCol + j]
+        const box = board.cells[boxRow + i][boxCol + j]
 
         // The pair of switches figure out which cells in the bordering box need checking
         const bytesToCheck = (() => {
@@ -45,13 +45,13 @@ function checkBoxBorderEmpty(board, boxRow, boxCol) {
         const cellAliveOnBorder = bytesToCheck.some(
           (byte) => byte & maskToCheck
         )
-        // If one is found to be alive on the border, return true
-        if (cellAliveOnBorder) return true
+        // If one is found to be alive on the border, return false
+        if (cellAliveOnBorder) return false
       }
     }
   }
-  // If none are found alive on any of the 8 borders, return false
-  return false
+  // If none are found alive on any of the 8 borders, return true
+  return true
 }
 
 // Certain boxes, if they have no live cells, and there are no live cells adjacent to them
