@@ -34,10 +34,9 @@ class Box extends Uint8Array {
     return this
   }
 
-  // Check if any cells are alive by summing the bytes. Any alive cell will make the sum non-zero
+  // Check if any cells are alive by checking each byte. Any alive cell will make the byte non-zero
   get isEmpty() {
-    const byteSum = this.reduce((a, b) => a + b, 0)
-    return byteSum === 0
+    return this.some((byte) => byte > 0)
   }
 }
 
