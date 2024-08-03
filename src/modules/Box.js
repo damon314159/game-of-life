@@ -5,6 +5,10 @@ class Box extends Uint8Array {
   // No magic numbers, but this is always 0b1000_0000 due to bit packing
   static #MOST_SIG_BIT = 1 << (Box.#BOX_LEN - 1)
 
+  static get BOX_LEN() {
+    return Box.#BOX_LEN
+  }
+
   constructor() {
     // Construct an array of 8 bytes. Each byte is 8 bits
     // This gives an 8 x 8 grid of bits, representing an 8 x 8 box of alive/dead cells
@@ -17,6 +21,17 @@ class Box extends Uint8Array {
     const masked = this[row] & (Box.#MOST_SIG_BIT >> col)
     // 0 or 1
     return masked && 1
+  }
+
+  // Set the state of the cell at (row, col) to be alive or dead
+  setBit(row, col, alive) {
+    this[row] = alive
+      ? // If it should be alive, OR with that bit
+        this[row] | (Box.#MOST_SIG_BIT >> col)
+      : // If it should be dead, AND with NOT that bit
+        this[row] & !(Box.#MOST_SIG_BIT >> col)
+
+    return this
   }
 
   // Check if any cells are alive by summing the bytes. Any alive cell will make the sum non-zero

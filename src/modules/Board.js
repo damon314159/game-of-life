@@ -2,7 +2,7 @@ import Box from './Box.js'
 
 class Board {
   // No magic numbers, but this is always 8 due to bit packing
-  static #BOX_LEN = 8
+  static #BOX_LEN = Box.BOX_LEN
 
   // Specify the number of 8 x 8 boxes vertically and horizontally
   constructor(octetsWide, octetsHigh) {
@@ -19,15 +19,32 @@ class Board {
     )
   }
 
-  // Get the state of the cell at (row, col)
-  get(row, col) {
+  static #getCellCoords(row, col) {
     const [boxRow, boxCol] = [
       Math.floor(row / Board.#BOX_LEN),
       Math.floor(col / Board.#BOX_LEN),
     ]
     const [inBoxRow, inBoxCol] = [row % Board.#BOX_LEN, col % Board.#BOX_LEN]
 
+    return { boxCol, boxRow, inBoxCol, inBoxRow }
+  }
+
+  // Get the state of the cell at (row, col)
+  get(row, col) {
+    const { boxRow, boxCol, inBoxRow, inBoxCol } = Board.#getCellCoords(
+      row,
+      col
+    )
     return this.cells[boxRow][boxCol].get(inBoxRow, inBoxCol)
+  }
+
+  set(row, col, alive) {
+    const { boxRow, boxCol, inBoxRow, inBoxCol } = Board.#getCellCoords(
+      row,
+      col
+    )
+    this.cells[boxRow][boxCol].setBit(inBoxRow, inBoxCol, alive)
+    return this
   }
 
   // Utility method to print to console the current state
