@@ -5,17 +5,17 @@ class Board {
   static #BOX_LEN = Box.BOX_LEN
 
   // Specify the number of 8 x 8 boxes vertically and horizontally
-  constructor(octetsWide, octetsHigh) {
+  constructor(boxesWide, boxesHigh) {
     // Ensure integer values
-    this.octetsWide = Math.floor(octetsWide)
-    this.octetsHigh = Math.floor(octetsHigh)
+    this.boxesWide = Math.floor(boxesWide)
+    this.boxesHigh = Math.floor(boxesHigh)
     // Calculate the resulting width and height
-    this.width = this.octetsWide * Board.#BOX_LEN
-    this.height = this.octetsHigh * Board.#BOX_LEN
+    this.width = this.boxesWide * Board.#BOX_LEN
+    this.height = this.boxesHigh * Board.#BOX_LEN
 
     // Populate cells with a matrix of boxes, which in turns represent 8 x 8 cells
-    this.cells = Array.from({ length: this.octetsHigh }, () =>
-      Array.from({ length: this.octetsWide }, () => new Box())
+    this.cells = Array.from({ length: this.boxesHigh }, () =>
+      Array.from({ length: this.boxesWide }, () => new Box())
     )
   }
 
