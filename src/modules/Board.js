@@ -60,11 +60,3 @@ class Board {
 }
 
 export default Board
-
-const board = new Board(3, 3)
-board.set(1, 1, 1)
-board.set(0, 3, 1)
-board.set(0, 3, 0)
-board.set(22, 11, 1)
-board.set(0, 11, 0)
-board.print()
