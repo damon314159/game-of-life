@@ -52,7 +52,7 @@ class Board {
     const outputLines = Array.from({ length: this.height }, () => '')
     for (let row = 0; row < this.height; row += 1) {
       for (let col = 0; col < this.width; col += 1) {
-        outputLines[row] += `${this.get(row, col)}  `
+        outputLines[row] += `${this.get(row, col) ? '\u25a0' : '\u2027'}  `
       }
     }
     console.log(outputLines.map((line) => line.trim()).join('\n'))
@@ -62,4 +62,9 @@ class Board {
 export default Board
 
 const board = new Board(3, 3)
+board.set(1, 1, true)
+board.set(0, 3, true)
+board.set(0, 3, false)
+board.set(22, 11, true)
+board.set(0, 11, false)
 board.print()
