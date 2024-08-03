@@ -60,5 +60,7 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'unicorn/prefer-node-protocol': 'error',
     'no-param-reassign': ['error', { props: false }],
+    'no-bitwise':'off',
+    'no-console':'off'
   },
 }
