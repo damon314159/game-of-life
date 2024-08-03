@@ -2,7 +2,7 @@ import Box from './Box.js'
 
 class Board {
   // No magic numbers, but this is always 8 due to bit packing
-  static #BOX_LEN = Box.BOX_LEN
+  static BOX_LEN = Box.BOX_LEN
 
   // Specify the number of 8 x 8 boxes vertically and horizontally
   constructor(boxesWide, boxesHigh) {
@@ -10,8 +10,8 @@ class Board {
     this.boxesWide = Math.floor(boxesWide)
     this.boxesHigh = Math.floor(boxesHigh)
     // Calculate the resulting width and height
-    this.width = this.boxesWide * Board.#BOX_LEN
-    this.height = this.boxesHigh * Board.#BOX_LEN
+    this.width = this.boxesWide * Board.BOX_LEN
+    this.height = this.boxesHigh * Board.BOX_LEN
 
     // Populate cells with a matrix of boxes, which in turns represent 8 x 8 cells
     this.cells = Array.from({ length: this.boxesHigh }, () =>
@@ -21,10 +21,10 @@ class Board {
 
   static #getCellCoords(row, col) {
     const [boxRow, boxCol] = [
-      Math.floor(row / Board.#BOX_LEN),
-      Math.floor(col / Board.#BOX_LEN),
+      Math.floor(row / Board.BOX_LEN),
+      Math.floor(col / Board.BOX_LEN),
     ]
-    const [inBoxRow, inBoxCol] = [row % Board.#BOX_LEN, col % Board.#BOX_LEN]
+    const [inBoxRow, inBoxCol] = [row % Board.BOX_LEN, col % Board.BOX_LEN]
 
     return { boxCol, boxRow, inBoxCol, inBoxRow }
   }
