@@ -1,17 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Board from '../../modules/Board'
 import getNextFrame from '../../modules/getNextFrame'
-import populateInitialBoard from '../../modules/populateInitialBoard'
 import BoxRow from './BoxRow'
 import './boardContainer.css'
 
-function BoardContainer({ boxesHigh, boxesWide, playing }) {
+function BoardContainer({ boxesHigh, boxesWide, playing, board, setBoard }) {
+  // Create a ref that tracks whether this render is the mounting render
   const isInitialRender = useRef(true)
 
-  const [board, setBoard] = useState(() =>
-    populateInitialBoard(new Board(boxesWide, boxesHigh))
-  )
-
+  // On unmount, set the ref back to true. This is only required due to React strict mode
   useEffect(
     () => () => {
       isInitialRender.current = true
@@ -19,6 +16,7 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
     []
   )
 
+  // If the dimensions are changed after initial render, create a new board
   useEffect(() => {
     if (isInitialRender.current) {
       isInitialRender.current = false
@@ -27,28 +25,34 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
     setBoard(new Board(boxesWide, boxesHigh))
   }, [boxesWide, boxesHigh])
 
+  // Start an interval to begin calculating a new frame, at most every 50ms
   useEffect(() => {
+    // If paused, return with an empty cleanup function
     if (!playing) return () => {}
+    // Else set up the interval
     let prevBoard = board
     const intervalId = setInterval(() => {
-      console.time('calc next frame')
+      // Calculate the next frame and set state
       const newBoard = getNextFrame(prevBoard)
       setBoard(newBoard)
+      // Update the closured reference
       prevBoard = newBoard
-      console.timeEnd('calc next frame')
-      console.timeEnd('render next frame')
-      console.time('render next frame')
     }, 50)
 
+    // Cleanup to clear interval when paused or unmounted
     return () => {
       clearInterval(intervalId)
     }
   }, [playing])
 
+  // Click event delegation so the user can modify the seed
   const handleClick = (e) => {
+    // Find the cell that was clicked
     const targetCell = document.elementFromPoint(e.clientX, e.clientY)
+    // If the game is running, or it wasn't a cell, ignore the event
     if (playing) return
     if (!targetCell.classList.contains('cell')) return
+    // Else setState to a new board with that cell toggled
     const { row, col } = targetCell.dataset
     const newBoard = Board.clone(board).set(
       row,
@@ -58,6 +62,7 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
     setBoard(newBoard)
   }
 
+  // Enter or space listeners for keyboard users
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       handleClick(e)

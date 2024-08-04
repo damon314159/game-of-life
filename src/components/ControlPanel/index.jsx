@@ -1,6 +1,7 @@
 import './controlPanel.css'
 
-function ControlPanel({ playing, setPlaying, size, setSize }) {
+function ControlPanel({ playing, setPlaying, size, setSize, handleClear }) {
+  // Holds the non-board interactive elements for the game
   return (
     <section aria-label="Control panel" className="control-panel">
       <button
@@ -10,6 +11,9 @@ function ControlPanel({ playing, setPlaying, size, setSize }) {
         }}
       >
         {playing ? 'Pause' : 'Play'}
+      </button>
+      <button type="button" onClick={handleClear}>
+        Clear
       </button>
       <div className="slider-wrapper">
         <label htmlFor="size">Grid Size {size}</label>
