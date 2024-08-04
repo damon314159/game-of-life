@@ -1,9 +1,40 @@
-.box-row {
+.board {
+  flex: 1 1 auto;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  max-height: min(80vh, 80vw);
+  aspect-ratio: 1;
+}
+
+.box-row {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.box {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
+  flex: 1 1 auto;
   display: flex;
-  align-items: center;
+}
+
+.cell {
+  flex: 1 1 auto;
+  width: 0;
+  height: 100%;
+  box-sizing: border-box;
+
+  &.alive {
+    background-color: #d2ffd2; /* Green background for alive cells */
+  }
+
+  &.dead {
+    background-color: rgb(
+      240 240 240 / 42%
+    ); /* Light gray background for dead cells */
+  }
 }

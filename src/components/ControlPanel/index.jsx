@@ -11,7 +11,7 @@ function ControlPanel({ playing, setPlaying, size, setSize }) {
       >
         {playing ? 'Pause' : 'Play'}
       </button>
-      <div className="flex-col">
+      <div className="slider-wrapper">
         <label htmlFor="size">Grid Size {size}</label>
         <input
           id="size"

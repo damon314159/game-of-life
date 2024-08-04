@@ -1,4 +1,3 @@
-import './cell.css'
 import { memo } from 'react'
 
 // eslint-disable-next-line prefer-arrow-callback

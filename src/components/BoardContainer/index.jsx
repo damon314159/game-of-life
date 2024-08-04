@@ -46,11 +46,11 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
   }, [playing])
 
   return (
-    <>
+    <div className="board">
       {board.cells.map((row, boxRow) => (
         <BoxRow key={boxRow} row={row} boxRow={boxRow} />
       ))}
-    </>
+    </div>
   )
 }
 
