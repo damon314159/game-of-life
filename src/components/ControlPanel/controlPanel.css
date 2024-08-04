@@ -1,3 +1,14 @@
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.buttons-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .slider-wrapper {
   display: flex;
   flex-direction: column;

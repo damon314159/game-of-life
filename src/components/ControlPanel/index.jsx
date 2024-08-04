@@ -1,30 +1,34 @@
 import './controlPanel.css'
+import Board from '../../modules/Board'
 
 function ControlPanel({ playing, setPlaying, size, setSize, handleClear }) {
   // Holds the non-board interactive elements for the game
   return (
     <section aria-label="Control panel" className="control-panel">
-      <button
-        type="button"
-        onClick={() => {
-          setPlaying(!playing)
-        }}
-      >
-        {playing ? 'Pause' : 'Play'}
-      </button>
-      <button type="button" onClick={handleClear}>
-        Clear
-      </button>
+      <div className="buttons-wrapper">
+        <button
+          type="button"
+          onClick={() => {
+            setPlaying(!playing)
+          }}
+        >
+          {playing ? 'Pause' : 'Play'}
+        </button>
+        <button type="button" onClick={handleClear} disabled={playing}>
+          Clear
+        </button>
+      </div>
       <div className="slider-wrapper">
-        <label htmlFor="size">Grid Size {size}</label>
+        <label htmlFor="size">Grid Size: {size * Board.BOX_LEN}</label>
         <input
           id="size"
           type="range"
-          defaultValue={size}
-          min={1}
-          max={40}
+          defaultValue={size * Board.BOX_LEN}
+          step={Board.BOX_LEN}
+          min={Board.BOX_LEN}
+          max={40 * Board.BOX_LEN}
           aria-label="Edit grid size"
-          onChange={(e) => setSize(e.target.value)}
+          onChange={(e) => setSize(e.target.value / Board.BOX_LEN)}
         />
       </div>
     </section>
