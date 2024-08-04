@@ -1,30 +1,22 @@
 import './App.css'
 import { useState } from 'react'
 import BoardContainer from './components/BoardContainer'
+import ControlPanel from './components/ControlPanel'
 
 function App() {
   const [playing, setPlaying] = useState(false)
-
-  const boxesHigh = 5
-  const boxesWide = 5
+  const [size, setSize] = useState(10)
 
   return (
     <>
       <h1>Game of Life</h1>
-      <BoardContainer
-        key={`${boxesHigh}x${boxesWide}`}
-        boxesHigh={boxesHigh}
-        boxesWide={boxesWide}
+      <BoardContainer boxesHigh={size} boxesWide={size} playing={playing} />
+      <ControlPanel
         playing={playing}
+        setPlaying={setPlaying}
+        size={size}
+        setSize={setSize}
       />
-      <button
-        type="button"
-        onClick={() => {
-          setPlaying(!playing)
-        }}
-      >
-        Play/Pause
-      </button>
     </>
   )
 }
