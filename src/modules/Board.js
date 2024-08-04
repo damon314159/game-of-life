@@ -1,4 +1,4 @@
-import Box from './Box.js'
+import Box from './Box'
 
 class Board {
   // No magic numbers, but this is always 8 due to bit packing

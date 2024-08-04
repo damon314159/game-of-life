@@ -56,7 +56,8 @@ module.exports = {
     'unicorn/prefer-node-protocol': 'error',
     'no-param-reassign': ['error', { props: false }],
     'no-bitwise':'off',
-    'no-console':'off'
+    'no-console':'off',
+    'react/prop-types':'off'
   },
   parserOptions: {
     ecmaVersion: 2022,

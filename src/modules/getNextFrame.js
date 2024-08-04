@@ -1,6 +1,6 @@
-import Board from './Board.js'
-import findActiveBoxes from './findActiveBoxes.js'
-import getNextCellState from './getNextCellState.js'
+import Board from './Board'
+import findActiveBoxes from './findActiveBoxes'
+import getNextCellState from './getNextCellState'
 
 function getNextFrame(board) {
   const { BOX_LEN } = Board

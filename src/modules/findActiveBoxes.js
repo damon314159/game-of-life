@@ -1,4 +1,4 @@
-import Board from './Board.js'
+import Board from './Board'
 
 function isOnBoxBorder(boxRow, boxCol, i, j, boxesHigh, boxesWide) {
   if (i === 0 && j === 0) return false // Itself

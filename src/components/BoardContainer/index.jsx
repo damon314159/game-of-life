@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Board from '../../modules/Board.js'
-import Cell from '../Cell/index.jsx'
+import Board from '../../modules/Board'
+import Cell from '../Cell'
 import './boardContainer.css'
 
 function BoardContainer({ boxesHigh, boxesWide }) {
@@ -18,7 +18,7 @@ function BoardContainer({ boxesHigh, boxesWide }) {
     <>
       {Array.from({ length: board.height }, (_, row) => (
         <div key={row} className="row">
-          {Array.from({ length: board.width }, (_, col) => (
+          {Array.from({ length: board.width }, (__, col) => (
             <Cell key={`${row}:${col}`} alive={board.get(row, col)} />
           ))}
         </div>
