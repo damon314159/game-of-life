@@ -2,7 +2,7 @@ import './controlPanel.css'
 
 function ControlPanel({ playing, setPlaying, size, setSize }) {
   return (
-    <>
+    <section aria-label="Control panel" className="control-panel">
       <button
         type="button"
         onClick={() => {
@@ -23,7 +23,7 @@ function ControlPanel({ playing, setPlaying, size, setSize }) {
           onChange={(e) => setSize(e.target.value)}
         />
       </div>
-    </>
+    </section>
   )
 }
 

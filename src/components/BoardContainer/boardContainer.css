@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   max-height: min(80vh, 80vw);
+  max-width: min(80vh, 80vw);
   aspect-ratio: 1;
   background-color: #4a4a52;
 }

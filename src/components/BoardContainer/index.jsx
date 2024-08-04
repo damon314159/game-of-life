@@ -67,7 +67,12 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
   return (
     // Event is delegated to elements with valid roles. Linter raising a false flag
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div className="board" onClick={handleClick} onKeyDown={handleKeyDown}>
+    <div
+      aria-label="Game board"
+      className="board"
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+    >
       {board.cells.map((row, boxRow) => (
         <BoxRow key={boxRow} row={row} boxRow={boxRow} />
       ))}

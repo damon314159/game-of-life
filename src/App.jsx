@@ -10,13 +10,15 @@ function App() {
   return (
     <>
       <h1>Game of Life</h1>
-      <BoardContainer boxesHigh={size} boxesWide={size} playing={playing} />
-      <ControlPanel
-        playing={playing}
-        setPlaying={setPlaying}
-        size={size}
-        setSize={setSize}
-      />
+      <div className="action-area">
+        <ControlPanel
+          playing={playing}
+          setPlaying={setPlaying}
+          size={size}
+          setSize={setSize}
+        />
+        <BoardContainer boxesHigh={size} boxesWide={size} playing={playing} />
+      </div>
     </>
   )
 }
