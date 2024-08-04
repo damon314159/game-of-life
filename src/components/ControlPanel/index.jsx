@@ -36,7 +36,7 @@ function ControlPanel({
           defaultValue={size * Board.BOX_LEN}
           step={Board.BOX_LEN}
           min={Board.BOX_LEN}
-          max={40 * Board.BOX_LEN}
+          max={30 * Board.BOX_LEN}
           aria-label="Edit grid size"
           onChange={(e) => setSize(e.target.value / Board.BOX_LEN)}
         />

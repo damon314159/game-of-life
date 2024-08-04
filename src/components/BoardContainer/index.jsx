@@ -1,30 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import Board from '../../modules/Board'
 import getNextFrame from '../../modules/getNextFrame'
 import BoxRow from './BoxRow'
 import './boardContainer.css'
 
-function BoardContainer({ boxesHigh, boxesWide, playing, board, setBoard }) {
-  // Create a ref that tracks whether this render is the mounting render
-  const isInitialRender = useRef(true)
-
-  // On unmount, set the ref back to true. This is only required due to React strict mode
-  useEffect(
-    () => () => {
-      isInitialRender.current = true
-    },
-    []
-  )
-
-  // If the dimensions are changed after initial render, create a new board
-  useEffect(() => {
-    if (isInitialRender.current) {
-      isInitialRender.current = false
-      return
-    }
-    setBoard(new Board(boxesWide, boxesHigh))
-  }, [boxesWide, boxesHigh])
-
+function BoardContainer({ playing, board, setBoard }) {
   // Start an interval to begin calculating a new frame, at most every 50ms
   useEffect(() => {
     // If paused, return with an empty cleanup function
