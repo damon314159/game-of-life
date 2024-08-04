@@ -39,6 +39,7 @@ function ControlPanel({
           max={30 * Board.BOX_LEN}
           aria-label="Edit grid size"
           onChange={(e) => setSize(e.target.value / Board.BOX_LEN)}
+          disabled={playing}
         />
       </div>
     </section>
