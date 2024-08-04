@@ -1,34 +1,44 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Board from '../../modules/Board'
 import getNextFrame from '../../modules/getNextFrame'
+import populateInitialBoard from '../../modules/populateInitialBoard'
 import Cell from '../Cell'
 import './boardContainer.css'
 
 function BoardContainer({ boxesHigh, boxesWide, playing }) {
-  const [board, setBoard] = useState(() => {
-    const initialBoard = new Board(boxesWide, boxesHigh)
-    initialBoard.set(3, 2, 1)
-    initialBoard.set(3, 3, 1)
-    initialBoard.set(3, 4, 1)
-    initialBoard.set(20, 3, 1)
-    initialBoard.set(20, 4, 1)
-    initialBoard.set(21, 4, 1)
-    initialBoard.set(22, 4, 1)
-    initialBoard.set(21, 2, 1)
+  const isInitialRender = useRef(true)
 
-    return initialBoard
-  })
+  const [board, setBoard] = useState(() =>
+    populateInitialBoard(new Board(boxesWide, boxesHigh))
+  )
+
+  useEffect(
+    () => () => {
+      isInitialRender.current = true
+    },
+    []
+  )
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false
+      return
+    }
+    setBoard(new Board(boxesWide, boxesHigh))
+  }, [boxesWide, boxesHigh])
 
   useEffect(() => {
     if (!playing) return () => {}
+    console.time('calc next frame')
     let prevBoard = board
     const intervalId = setInterval(() => {
-      console.time('calc next frame')
       const newBoard = getNextFrame(prevBoard)
       setBoard(newBoard)
       prevBoard = newBoard
       console.timeEnd('calc next frame')
-    }, 0)
+      console.timeEnd('render next frame')
+      console.time('render next frame')
+    }, 50)
 
     return () => {
       clearInterval(intervalId)
