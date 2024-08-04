@@ -4,6 +4,7 @@
   flex-direction: column;
   max-height: min(80vh, 80vw);
   aspect-ratio: 1;
+  background-color: #4a4a52;
 }
 
 .box-row {
@@ -29,12 +30,11 @@
   box-sizing: border-box;
 
   &.alive {
-    background-color: #d2ffd2; /* Green background for alive cells */
+    background-color: #ace1ac;
   }
+}
 
-  &.dead {
-    background-color: rgb(
-      240 240 240 / 42%
-    ); /* Light gray background for dead cells */
-  }
+.row:nth-child(even) .dead:nth-of-type(even),
+.row:nth-child(odd) .dead:nth-of-type(odd) {
+  background-color: #47474f;
 }

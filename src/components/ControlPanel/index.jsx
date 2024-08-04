@@ -18,7 +18,7 @@ function ControlPanel({ playing, setPlaying, size, setSize }) {
           type="range"
           defaultValue={size}
           min={1}
-          max={20}
+          max={40}
           aria-label="Edit grid size"
           onChange={(e) => setSize(e.target.value)}
         />
