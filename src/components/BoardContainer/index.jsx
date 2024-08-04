@@ -45,8 +45,29 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
     }
   }, [playing])
 
+  const handleClick = (e) => {
+    const targetCell = document.elementFromPoint(e.clientX, e.clientY)
+    if (playing) return
+    if (!targetCell.classList.contains('cell')) return
+    const { row, col } = targetCell.dataset
+    const newBoard = Board.clone(board).set(
+      row,
+      col,
+      board.get(row, col) ? 0 : 1
+    )
+    setBoard(newBoard)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleClick(e)
+    }
+  }
+
   return (
-    <div className="board">
+    // Event is delegated to elements with valid roles. Linter raising a false flag
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div className="board" onClick={handleClick} onKeyDown={handleKeyDown}>
       {board.cells.map((row, boxRow) => (
         <BoxRow key={boxRow} row={row} boxRow={boxRow} />
       ))}

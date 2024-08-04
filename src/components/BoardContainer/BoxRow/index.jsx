@@ -7,7 +7,12 @@ const BoxRow = memo(
     return (
       <div className="box-row">
         {row.map((box, boxCol) => (
-          <Box key={`${boxRow}:${boxCol}`} box={box} />
+          <Box
+            key={`${boxRow}:${boxCol}`}
+            box={box}
+            boxRow={boxRow}
+            boxCol={boxCol}
+          />
         ))}
       </div>
     )
