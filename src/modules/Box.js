@@ -15,6 +15,15 @@ class Box extends Uint8Array {
     super(new ArrayBuffer(Box.#BOX_LEN), 0, Box.#BOX_LEN)
   }
 
+  static clone(box) {
+    if (!(box instanceof Box)) {
+      throw new Error('box must be instance of Box to be cloned')
+    }
+    const newBox = new Box()
+    newBox.set(box)
+    return newBox
+  }
+
   // Get the state of the cell at (row, col) in the box
   get(row, col) {
     // Mask the bit at col position in the row

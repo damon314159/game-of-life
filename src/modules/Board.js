@@ -29,6 +29,19 @@ class Board {
     return { boxCol, boxRow, inBoxCol, inBoxRow }
   }
 
+  static clone(board) {
+    if (!(board instanceof Board)) {
+      throw new Error('board must be instance of Board to be cloned')
+    }
+    const newBoard = new Board(board.boxesWide, board.boxesHigh)
+    newBoard.cells = Array.from({ length: board.boxesHigh }, (_, boxRow) =>
+      Array.from({ length: board.boxesWide }, (__, boxCol) =>
+        Box.clone(board.cells[boxRow][boxCol])
+      )
+    )
+    return newBoard
+  }
+
   // Get the state of the cell at (row, col)
   get(row, col) {
     const { boxRow, boxCol, inBoxRow, inBoxCol } = Board.#getCellCoords(
