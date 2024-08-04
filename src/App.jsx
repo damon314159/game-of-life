@@ -2,6 +2,7 @@ import './App.css'
 import { useEffect, useRef, useState } from 'react'
 import BoardContainer from './components/BoardContainer'
 import ControlPanel from './components/ControlPanel'
+import RulesDialog from './components/RulesDialogue'
 import Board from './modules/Board'
 import populateInitialBoard from './modules/populateInitialBoard'
 
@@ -41,6 +42,7 @@ function App() {
   return (
     <>
       <h1>Game of Life</h1>
+      <RulesDialog />
       <div className="action-area">
         <ControlPanel
           playing={playing}
