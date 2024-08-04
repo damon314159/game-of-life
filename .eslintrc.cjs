@@ -19,11 +19,6 @@ module.exports = {
   rules: {
     'arrow-body-style': 'error',
     'prefer-arrow-callback': 'error',
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      { ts: 'never', cts: 'never', mts: 'never', tsx: 'never' },
-    ],
     'import/no-extraneous-dependencies': [
       'error',
       {

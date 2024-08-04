@@ -1,0 +1,16 @@
+.cell {
+  width: 20px;             /* Width of each cell */
+  height: 20px;            /* Height of each cell */
+  border: 1px solid #ccc;  /* Light gray border for each cell */
+  box-sizing: border-box;  /* Ensures padding and border are included in the element's total width and height */
+  display: inline-block;   /* Makes each cell an inline-block element */
+  margin: -1px 0 0 -1px;   /* Removes extra spacing between cells */
+}
+
+.alive {
+  background-color: #d2ffd2;  /* Green background for alive cells */
+}
+
+.dead {
+  background-color: rgb(240 240 240 / 42%);  /* Light gray background for dead cells */
+}
