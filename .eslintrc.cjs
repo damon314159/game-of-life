@@ -5,16 +5,16 @@ module.exports = {
     node: true,
   },
   extends: [
-    'airbnb-base',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'plugin:require-extensions/recommended',
-    'prettier',
+    "eslint:recommended",
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "prettier"
   ],
   plugins: [
     'unicorn',
+    'react',
     'sort-exports',
-    'require-extensions',
   ],
   rules: {
     'arrow-body-style': 'error',
@@ -65,5 +65,9 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2022,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module",
   }
 }
