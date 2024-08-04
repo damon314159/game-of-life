@@ -29,9 +29,9 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
 
   useEffect(() => {
     if (!playing) return () => {}
-    console.time('calc next frame')
     let prevBoard = board
     const intervalId = setInterval(() => {
+      console.time('calc next frame')
       const newBoard = getNextFrame(prevBoard)
       setBoard(newBoard)
       prevBoard = newBoard

@@ -1,7 +1,9 @@
 import './cell.css'
+import { memo } from 'react'
 
-function Cell({ alive }) {
+// eslint-disable-next-line prefer-arrow-callback
+const Cell = memo(function Cell({ alive }) {
   return <div className={`cell${alive ? ' alive' : ' dead'}`} />
-}
+})
 
 export default Cell
