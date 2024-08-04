@@ -2,6 +2,7 @@ import { memo } from 'react'
 import Board from '../../../modules/Board'
 import Cell from '../Cell'
 
+// Memoising this component replaces 64 Cell renders with directly comparing bytes
 const Box = memo(
   // eslint-disable-next-line prefer-arrow-callback
   function Box({ box, boxRow, boxCol }) {
@@ -25,8 +26,10 @@ const Box = memo(
       </div>
     )
   },
+  // Custom propsAreEqual function for memo.
+  // Checks if the box contains identical alive/dead cells by comparing bytes
   ({ box: prevBox }, { box: nextBox }) =>
-    prevBox.join(',') === nextBox.join(',')
+    prevBox.every((byte, i) => nextBox[i] === byte)
 )
 
 export default Box

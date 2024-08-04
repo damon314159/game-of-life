@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import Box from '../Box'
 
+// Memoising this component replaces row.length * 64 Cell renders with directly comparing bytes
 const BoxRow = memo(
   // eslint-disable-next-line prefer-arrow-callback
   function BoxRow({ row, boxRow }) {
@@ -17,9 +18,13 @@ const BoxRow = memo(
       </div>
     )
   },
+  // Custom propsAreEqual function for memo.
+  // Checks if the box contains identical alive/dead cells by comparing bytes
   ({ row: prevRow }, { row: nextRow }) =>
-    prevRow.map((box) => box.join(',')).join(',') ===
-    nextRow.map((box) => box.join(',')).join(',')
+    prevRow.length === nextRow.length &&
+    prevRow.every((box, boxCol) =>
+      box.every((byte, i) => nextRow[boxCol][i] === byte)
+    )
 )
 
 export default BoxRow
