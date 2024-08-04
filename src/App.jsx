@@ -5,7 +5,7 @@ import ControlPanel from './components/ControlPanel'
 
 function App() {
   const [playing, setPlaying] = useState(false)
-  const [size, setSize] = useState(10)
+  const [size, setSize] = useState(20)
 
   return (
     <>

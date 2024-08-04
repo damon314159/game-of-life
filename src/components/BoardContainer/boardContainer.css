@@ -1,3 +1,8 @@
+.box-row {
+  display: flex;
+  align-items: center;
+}
+
 .row {
   display: flex;
   align-items: center;

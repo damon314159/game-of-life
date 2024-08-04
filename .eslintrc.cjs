@@ -57,7 +57,8 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
     'no-bitwise':'off',
     'no-console':'off',
-    'react/prop-types':'off'
+    'react/prop-types':'off',
+    "react/no-array-index-key":'off'
   },
   parserOptions: {
     ecmaVersion: 2022,

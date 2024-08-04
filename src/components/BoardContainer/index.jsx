@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Board from '../../modules/Board'
 import getNextFrame from '../../modules/getNextFrame'
 import populateInitialBoard from '../../modules/populateInitialBoard'
-import Cell from '../Cell'
+import BoxRow from './BoxRow'
 import './boardContainer.css'
 
 function BoardContainer({ boxesHigh, boxesWide, playing }) {
@@ -47,12 +47,8 @@ function BoardContainer({ boxesHigh, boxesWide, playing }) {
 
   return (
     <>
-      {Array.from({ length: board.height }, (_, row) => (
-        <div key={row} className="row">
-          {Array.from({ length: board.width }, (__, col) => (
-            <Cell key={`${row}:${col}`} alive={board.get(row, col)} />
-          ))}
-        </div>
+      {board.cells.map((row, boxRow) => (
+        <BoxRow key={boxRow} row={row} boxRow={boxRow} />
       ))}
     </>
   )
