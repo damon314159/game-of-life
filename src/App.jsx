@@ -26,6 +26,9 @@ function App() {
           handleClear={() =>
             !playing && setBoard(new Board(board.boxesWide, board.boxesHigh))
           }
+          handleReset={() =>
+            !playing && setBoard(populateInitialBoard(new Board(size, size)))
+          }
         />
         <BoardContainer
           boxesHigh={size}

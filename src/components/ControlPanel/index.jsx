@@ -1,7 +1,14 @@
 import './controlPanel.css'
 import Board from '../../modules/Board'
 
-function ControlPanel({ playing, setPlaying, size, setSize, handleClear }) {
+function ControlPanel({
+  playing,
+  setPlaying,
+  size,
+  setSize,
+  handleClear,
+  handleReset,
+}) {
   // Holds the non-board interactive elements for the game
   return (
     <section aria-label="Control panel" className="control-panel">
@@ -16,6 +23,9 @@ function ControlPanel({ playing, setPlaying, size, setSize, handleClear }) {
         </button>
         <button type="button" onClick={handleClear} disabled={playing}>
           Clear
+        </button>
+        <button type="button" onClick={handleReset} disabled={playing}>
+          Reset
         </button>
       </div>
       <div className="slider-wrapper">
